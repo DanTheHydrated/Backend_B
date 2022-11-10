@@ -38,7 +38,7 @@ class Menu(models.Model):
                 'title': self.cuisine_id.cuisine_type,
             }, 'category':
             {
-                'title': self.category_id.cuisine_type,
+                'title': self.category_id.category_type,
             }
         }
 
