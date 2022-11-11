@@ -19,6 +19,12 @@ class Category(models.Model):
 
 
 
+class Ingrediants(models.Model):
+    ingrediants_list = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.ingrediants_list
+
 
 class Menu(models.Model):
     title = models.CharField(max_length=300, null=True, name='title')
@@ -27,6 +33,7 @@ class Menu(models.Model):
     description = models.CharField(null = True, max_length=1000)
     cuisine_id = models.ForeignKey("Cuisine", on_delete=models.CASCADE)
     category_id = models.ForeignKey("Category", on_delete=models.CASCADE)
+    ingrediant_list = models.ManyToManyField("Ingrediants")
 
     def json(self):
         return{
@@ -36,10 +43,11 @@ class Menu(models.Model):
             'discription': self.description,
             'cuisine': {
                 'title': self.cuisine_id.cuisine_type,
-            }, 'category':
-            {
+            }, 'category': {
                 'title': self.category_id.category_type,
-            }
+            }, 'ingrediants': {
+                'title': self.ingrediants_id.ingrediants_list,
+            },
         }
 
 
